@@ -47,7 +47,7 @@ function Login() {
                 className="rounded bg-gray-300 p-1 pl-3 w-full font-sans">
                 </input>
 
-                <input type="text" name="password" placeholder="Senha"
+                <input type="password" name="password" placeholder="Senha"
                 className="rounded bg-gray-300 p-1 pl-3 w-full font-sans">
                 </input>
                 

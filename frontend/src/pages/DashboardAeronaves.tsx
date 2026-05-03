@@ -5,6 +5,7 @@ import Topbar from '../components/Topbar';
 import Footer from '../components/Footer';
 import NavigationComponent from '../components/Navigation';
 import AeronaveCard from '../components/AeronaveCard';
+import CadastroAeronaveModal from '../components/cadastroAeronaveModal';
 
 export interface Aeronave {
   codigo: string;
@@ -17,6 +18,7 @@ export interface Aeronave {
 
 function DashboardAeronaves() {
   const [selecionado, setSelecionado] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const aeronave1 = {
     codigo: 'A001',
@@ -58,22 +60,37 @@ function DashboardAeronaves() {
     alcance: 3000
   };
 
-  const aeronaves: Aeronave[] = [aeronave1, aeronave2, aeronave3, aeronave4, aeronave5];
+  const [aeronaves, setAeronaves] = useState<Aeronave[]>(
+    [
+    aeronave1, 
+    aeronave2, 
+    aeronave3, 
+    aeronave4, 
+    aeronave5
+  ])
+
+  const salvarAeronave = (aeronave: Aeronave) => {
+    setAeronaves([...aeronaves, aeronave])
+  }
+
 
   return (
-    <div className="bg-fundo h-screen w-screen flex flex-col">
+    <div className="bg-fundo min-h-screen flex flex-col overflow-x-hidden">
         <Topbar/>
-        <NavigationComponent/>
+        <NavigationComponent openModal={() => setIsModalOpen(true)}/>
+
+
+        <CadastroAeronaveModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={salvarAeronave}/>
 
         <div className='m-8 grid grid-cols-4 grid-rows-2 gap-4'>
 
-        {aeronaves.map((objetoAeronave) => (
-          <AeronaveCard aeronave={objetoAeronave}/>
+        {aeronaves.map((objetoAeronave, index) => (
+          <AeronaveCard aeronave={objetoAeronave} key={index}/>
         ))}
 
         </div>  
 
-
+        
 
         <Footer/>
     </div>

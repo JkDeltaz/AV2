@@ -3,8 +3,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import '../App.css'
 import { useAuth } from '../contexts/AuthContext';
 
-
-function NavigationComponent() {
+function NavigationComponent({ openModal }: {openModal: () => void}) {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -49,7 +48,9 @@ function NavigationComponent() {
         
         {location.pathname === "/dashboardAeronaves" && 
         
-        <button className='bg-primario font-mono rounded border p-1 px-6 cursor-pointer border-white/10 text-2xl hover:scale-102 transition ml-auto'>
+        <button className='bg-primario font-mono rounded border p-1 px-6 cursor-pointer border-white/10 text-2xl hover:scale-102 transition ml-auto'
+        onClick={openModal}
+        >
         Adicionar Aeronave
         </button>
         
