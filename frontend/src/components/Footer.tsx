@@ -6,11 +6,21 @@ import { useAuth } from '../contexts/AuthContext';
 
 function Footer() {
   
-    const {userPermission} = useAuth();
+    const {userPermission, logout} = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+      logout();
+      navigate("/login");
+    }
 
     return (
-    <div className='p-8 mt-auto'>
+    <div className='mt-auto flex ml-8 mb-4'>
         <h1 className='text-default font-mono text-xl'>Usuário : {userPermission}</h1>
+        <button className='text-red-500 font-mono text-xl ml-8 cursor-pointer hover:underline'
+        onClick={handleLogout}>
+          Sair
+        </button>
     </div>
   )
 }

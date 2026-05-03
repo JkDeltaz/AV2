@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-fundo: #1A1C19;
-  --color-superficie: #2D362B;
-  --color-primario: #9FEF00;
-  --color-default: #E4E1DB;
+  --color-fundo: #121212;
+  --color-superficie: #1E1E1E;
+  --color-primario: #C5A028;
+  --color-default: #E0E0E0;
   --font-sans: "Inter Tight", ui-sans-serif, system-ui;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular;
 }

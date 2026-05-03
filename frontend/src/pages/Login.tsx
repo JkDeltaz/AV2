@@ -13,12 +13,13 @@ function Login() {
   const navigate = useNavigate();
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedLevel(event.target.value);
+    const novoValor = event.target.value;
+    setSelectedLevel(novoValor);
   }
 
   const handleLogin = () => {
     
-    console.log(selectedLevel);
+    console.log(selectedLevel)
     switch (selectedLevel) {
       case "Administrador":
         login("Administrador");
@@ -55,7 +56,7 @@ function Login() {
                 
                 <option value="Administrador">Administrador</option>
                 <option value="Engenheiro">Engenheiro</option>
-                <option value="Operário">Operário</option>
+                <option value="Operador">Operador</option>
 
                 </select>
 
