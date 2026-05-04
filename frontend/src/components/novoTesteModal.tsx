@@ -1,7 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent, type FormEventHandler, type SyntheticEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
-import type { Aeronave } from '../pages/DashboardAeronaves';
+import { type Aeronave } from '../data/mock_data';
 
 export interface novoTesteProps {
   isOpen: boolean;

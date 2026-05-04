@@ -1,9 +1,8 @@
 import { useState, type ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
-import type { Aeronave } from '../pages/DashboardAeronaves';
 import Icone from './Icone';
-
+import { type Aeronave } from '../data/mock_data';
 
 function AeronaveCard({ aeronave }: { aeronave: Aeronave }) {
 

@@ -1,30 +1,29 @@
 import { useState, type ChangeEvent, type FormEvent, type FormEventHandler, type SyntheticEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
-import { type Aeronave } from '../data/mock_data';
+import { type Aeronave, type Etapa } from '../data/mock_data';
 
-export interface CadastroAeronaveProps {
+export interface IniciarEtapaProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (novaAeronave: Aeronave) => void;
+  onSave: (novaEtapa: Etapa) => void;
 }
 
-function CadastroAeronaveModal({ isOpen, onClose, onSave }: CadastroAeronaveProps) {
+function IniciarEtapaModal({ isOpen, onClose, onSave }: IniciarEtapaProps) {
   if (!isOpen) return null;
 
-  const [aeronaveData, setAeronaveData] = useState<Aeronave>({
-    codigo: "",
-    modelo: "",
-    tipo: "Comercial",
-    capacidade: 0,
-    alcance: 0,
-    etapas: []
+  const [etapaData, setEtapaData] = useState<Etapa>({
+    id: "",
+    nome: "",
+    prazo: 0,
+    status: "Pendente",
+    funcionarios: []
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
-    setAeronaveData((prev) => ({
+    setEtapaData((prev) => ({
         ...prev,
         [name]: value,
     }));
@@ -33,9 +32,9 @@ function CadastroAeronaveModal({ isOpen, onClose, onSave }: CadastroAeronaveProp
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const novoValor = event.target.value;
 
-    setAeronaveData((prev) => ({
+    setEtapaData((prev) => ({
         ...prev,
-        tipo: novoValor,
+        status: novoValor,
     }));
   }
 
@@ -43,14 +42,9 @@ function CadastroAeronaveModal({ isOpen, onClose, onSave }: CadastroAeronaveProp
     event.preventDefault();
   
     onSave({
-      ...aeronaveData,
-      codigo: aeronaveData.codigo,
-      modelo: aeronaveData.modelo,
-      tipo: aeronaveData.tipo,
-      capacidade: aeronaveData.capacidade,
-      alcance: aeronaveData.alcance
+      ...etapaData
     });
-  
+    
     onClose();
   };
 
@@ -59,38 +53,31 @@ function CadastroAeronaveModal({ isOpen, onClose, onSave }: CadastroAeronaveProp
   return (
     <div className="bg-gray-950/60 fixed w-screen h-screen flex justify-center align-center items-center">
         
-        <div className='bg-superficie m-8 w-1/4 h-2/3 flex flex-col justify-center align-center border border-white/10 rounded'>
+        <div className='bg-superficie m-8 w-1/4 h-2/4 flex flex-col justify-center align-center border border-white/10 rounded'>
             
             <div className='mx-8 mt-6 mb-4'>
-                <h1 className='font-mono text-3xl text-default text-center'>Cadastrar Aeronave</h1>
+                <h1 className='font-mono text-3xl text-default text-center'>Iniciar Etapa</h1>
             </div>
 
             <div className='mx-8'>
                 <form onSubmit={handleSubmit}
                 className='gap-4 flex flex-col items-center'>
 
-                    <input type="text" name="codigo" placeholder="Código" onChange={handleChange} required
+                    <input type="text" name="nome" placeholder="Nome" onChange={handleChange} required
                     className={inputCss}>
                     </input>
 
-                    <input type="text" name="modelo" placeholder="Modelo" onChange={handleChange} required
+                    <input type="number" name="prazo" placeholder="Prazo (Dias)" onChange={handleChange} required
                     className={inputCss}>
                     </input>
 
-
-                    <select name="tipo" className={inputCss} required
-                    value={aeronaveData.tipo} onChange={handleSelectChange}> 
-                        <option value="Comercial">Comercial</option>
-                        <option value="Militar">Militar</option>
+                    <select name="status" className={inputCss} required
+                    value={etapaData.status} onChange={handleSelectChange}> 
+                        <option value="Pendente">Pendente</option>
+                        <option value="Em Andamento">Em Andamento</option>
+                        <option value="Concluída">Concluída</option>
                     </select>
 
-                    <input type="number" name="capacidade" placeholder="Capacidade" onChange={handleChange}required
-                    className={inputCss}>
-                    </input>
-
-                    <input type="number" name="alcance" placeholder="Alcance" onChange={handleChange} required
-                    className={inputCss}>
-                    </input>
 
                     <button 
                     className='bg-primario text-xl p-2 font-mono border border-white/10 rounded cursor-pointer hover:scale-102 hover:shadow-xl w-1/3'
@@ -112,4 +99,4 @@ function CadastroAeronaveModal({ isOpen, onClose, onSave }: CadastroAeronaveProp
   )
 }
 
-export default CadastroAeronaveModal
+export default IniciarEtapaModal

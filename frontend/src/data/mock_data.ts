@@ -1,0 +1,158 @@
+
+export interface Funcionario {
+    id: string;
+    nome: string;
+    telefone: string;
+    endereco: string;
+    usuario: string;
+    senha: string;
+    nivelPermissao: string;
+}
+
+export interface Etapa {
+  id: string;
+  nome: string;
+  prazo: number;
+  status: string;
+  funcionarios: Array<string>;
+}
+
+export interface Aeronave {
+  codigo: string;
+  modelo: string;
+  tipo: string;
+  capacidade: number;
+  alcance: number;
+  etapas: Array<Etapa>;
+}
+
+const funcionarios: Funcionario[] = [
+  {
+    id: 'F-001',
+    nome: 'Rebeca Lima',
+    telefone: '(12) 99876-5432',
+    endereco: 'Av. Brigadeiro Faria Lima, 2000 - São José dos Campos, SP',
+    usuario: 'rebeca.admin',
+    senha: 'hash_password_123',
+    nivelPermissao: 'Administrador'
+  },
+  {
+    id: 'F-102',
+    nome: 'Isaura de Lourdes',
+    telefone: '(11) 98765-4321',
+    endereco: 'Rua das Turbinas, 45 - Campinas, SP',
+    usuario: 'isaura.eng',
+    senha: 'hash_password_456',
+    nivelPermissao: 'Engenheiro'
+  },
+  {
+    id: 'F-201',
+    nome: 'Guilherme Rosa',
+    telefone: '(21) 97654-3210',
+    endereco: 'Estrada do Galeão, s/n - Rio de Janeiro, RJ',
+    usuario: 'guilherme.v',
+    senha: 'hash_password_789',
+    nivelPermissao: 'Engenheiro'
+  },
+  {
+    id: 'F-305',
+    nome: 'Letícia Gabrielly',
+    telefone: '(31) 96543-2109',
+    endereco: 'Rua Aeroporto, 12 - Belo Horizonte, MG',
+    usuario: 'le.op',
+    senha: 'hash_password_012',
+    nivelPermissao: 'Operador'
+  },
+  {
+    id: 'F-408',
+    nome: 'Natsuki Subaru',
+    telefone: '(12) 77777-0413',
+    endereco: 'Lugunica',
+    usuario: 'subaru.maint',
+    senha: 'hash_password_345',
+    nivelPermissao: 'Operador'
+  }
+];
+
+
+const aeronave1 = {
+  codigo: 'A001',
+  modelo: 'Boeing 737',
+  tipo: 'Comercial',
+  capacidade: 180,
+  alcance: 5000,
+  etapas: [
+    { id: "1", nome: 'Inspeção de Turbinas', prazo: 10, status: 'Concluída', funcionarios: ['F-102', 'F-201'] },
+    { id: "2", nome: 'Revisão de Aviônicos', prazo: 20, status: 'Em Andamento', funcionarios: ['F-102'] },
+    { id: "3", nome: 'Abastecimento', prazo: 30, status: 'Concluída', funcionarios: [] }
+  ]
+};
+
+const aeronave2 = {
+  codigo: 'A002',
+  modelo: 'Airbus A320',
+  tipo: 'Comercial',
+  capacidade: 150,
+  alcance: 4000,
+  etapas: [
+    { id: "1", nome: 'Limpeza Interna', prazo: 15, status: 'Concluída', funcionarios: ['F-305'] },
+    { id: "2", nome: 'Checklist de Segurança', prazo: 16, status: 'Pendente', funcionarios: [] }
+  ]
+};
+
+const aeronave3 = {
+  codigo: 'A003',
+  modelo: 'Cessna 172',
+  tipo: 'Militar',
+  capacidade: 4,
+  alcance: 800,
+  etapas: []
+};
+
+const aeronave4 = {
+  codigo: 'A004',
+  modelo: 'Embraer E195',
+  tipo: 'Comercial',
+  capacidade: 120,
+  alcance: 3500,
+  etapas: [
+    { id: "1", nome: 'Troca de Óleo', prazo: 67, status: 'Em Andamento', funcionarios: ['F-305', 'F-408'] }
+  ]
+};
+
+const aeronave5 = {
+  codigo: 'A005',
+  modelo: 'Bombardier CRJ900',
+  tipo: 'Militar',
+  capacidade: 90,
+  alcance: 3000,
+  etapas: [
+    { id: "1", nome: 'Pintura de Fuselagem', prazo: 13, status: 'Concluída', funcionarios: [] },
+    { id: "2", nome: 'Ajuste de Flaps', prazo: 20, status: 'Concluída', funcionarios: ['F-201'] },
+    { id: "3", nome: 'Teste de Voo', prazo: 90, status: 'Pendente', funcionarios: ['F-001', 'F-102'] }
+  ]
+};
+
+const aeronaves: Aeronave[] = [aeronave1, aeronave2, aeronave3, aeronave4, aeronave5];
+
+export function getAeronaves() {
+    return aeronaves;
+} 
+
+export function getFuncionarios() {
+    return funcionarios;
+}
+
+export function adicionarFuncionarioAEtapa(etapaId: string, funcionarioId: string) {
+  for (const aeronave of aeronaves) {
+    for (const etapa of aeronave.etapas) {
+      if (etapa.id === etapaId) {
+        if (!etapa.funcionarios.includes(funcionarioId)) {
+          console.log("Consegui adicionar o funcionário " + funcionarioId + " à etapa " + etapaId);
+          etapa.funcionarios.push(funcionarioId);
+        }
+        return;
+        }
+    }
+  }
+}

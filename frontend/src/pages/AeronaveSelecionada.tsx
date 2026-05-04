@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import NavigationComponent from '../components/Navigation';
 import type { Aeronave, Etapa } from './DashboardAeronaves';
 import Icone from '../components/Icone';
-import NovoTesteModal from '../components/novoTesteModal';
+import NovoTesteModal from '../components/NovoTesteModal';
 
 function AeronaveSelecionada() {
 
