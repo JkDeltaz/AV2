@@ -2,11 +2,17 @@ import { useState, type ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
 import type { Aeronave } from '../pages/DashboardAeronaves';
+import Icone from './Icone';
 
 
 function AeronaveCard({ aeronave }: { aeronave: Aeronave }) {
 
   const imgSource = `/${aeronave.tipo}.png`;
+  const navigate = useNavigate();
+
+  const handleAbrir = () => {
+    navigate("/aeronaveSelecionada", { state: { aeronave: aeronave } });
+  }
 
   return (
     <div className="bg-superficie rounded border border-white/10 p-2 hover:scale-102 hover:shadow-xl transition">
@@ -20,16 +26,16 @@ function AeronaveCard({ aeronave }: { aeronave: Aeronave }) {
         </div>
 
         <div className='max-w-1/3 max-h-1/3 ml-auto'>
-          <img src={imgSource} alt={aeronave.modelo} 
-          className=''
-          />
+            {aeronave.tipo === "Comercial" && <Icone icone={aeronave.tipo}></Icone>}
+            {aeronave.tipo === "Militar" && <Icone icone={aeronave.tipo}></Icone>}
         </div>
 
       </div>
 
 
       <div className='flex flex-row'>
-        <button className='bg-primario rounded border border-white/10 p-1 px-4 cursor-pointer ml-auto mr-2'>
+        <button className='bg-primario rounded border border-white/10 p-1 px-4 cursor-pointer ml-auto mr-2'
+        onClick={handleAbrir}>
           Abrir
         </button>
       </div>

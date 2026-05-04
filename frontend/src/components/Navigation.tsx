@@ -8,6 +8,8 @@ function NavigationComponent({ openModal }: {openModal: () => void}) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const aeronave = location.state?.aeronave;
+
   const defaultBtn = 'bg-fundo pt-2 pb-2 text-2xl rounded font-mono border-2 border-superficie cursor-pointer text-default min-w-1/10 text-center hover:scale-102 hover:shadow-xl transition'
   const selectedBtn = 'bg-primario pt-2 pb-2 text-2xl rounded font-mono border-2 border-superficie cursor-pointer min-w-1/10 text-center hover:scale-102 hover:shadow-xl transition'
 
@@ -29,9 +31,15 @@ function NavigationComponent({ openModal }: {openModal: () => void}) {
 
         <NavLink 
             to="/dashboardAeronaves"
-            className={({ isActive }) => 
-                isActive ? selectedBtn : defaultBtn
-            }
+                className={({ isActive }) => {
+                    const isChildRoute = location.pathname.includes('/aeronave') || location.pathname.includes('/etapa');
+                    
+                    return `${
+                    isActive || isChildRoute 
+                        ? selectedBtn
+                        : defaultBtn          
+                    }`;
+                }}
         >
         Aeronaves
         </NavLink>
@@ -54,6 +62,15 @@ function NavigationComponent({ openModal }: {openModal: () => void}) {
         Adicionar Aeronave
         </button>
         
+        }
+
+        {location.pathname === "/aeronaveSelecionada" && 
+        
+        <h1 
+        className='font-mono text-default text-2xl ml-auto mt-auto mr-2'>
+            {aeronave.modelo}
+        </h1>        
+
         }
 
 

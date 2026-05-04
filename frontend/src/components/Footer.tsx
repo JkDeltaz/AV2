@@ -15,7 +15,7 @@ function Footer() {
     }
 
     return (
-    <div className='mt-auto flex ml-8 mb-4'>
+    <div className='mt-auto flex ml-8 mb-4 max-h-1/12'>
         <h1 className='text-default font-mono text-xl'>Usuário : {userPermission}</h1>
         <button className='text-red-500 font-mono text-xl ml-8 cursor-pointer hover:underline'
         onClick={handleLogout}>

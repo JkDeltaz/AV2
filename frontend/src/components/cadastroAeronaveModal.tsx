@@ -17,7 +17,8 @@ function CadastroAeronaveModal({ isOpen, onClose, onSave }: CadastroAeronaveProp
     modelo: "",
     tipo: "Comercial",
     capacidade: 0,
-    alcance: 0
+    alcance: 0,
+    etapas: []
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

@@ -4,6 +4,8 @@ import DashboardAeronaves from './pages/DashboardAeronaves';
 import DashboardFuncionarios from './pages/DashboardFuncionarios';
 import DashboardPecas from './pages/DashboardPecas';
 import './App.css'
+import AeronaveSelecionada from './pages/AeronaveSelecionada';
+import EtapaSelecionada from './pages/EtapaSelecionada';
 
 function App() {
 
@@ -13,6 +15,8 @@ function App() {
       <Route path="/dashboardAeronaves" element={<DashboardAeronaves />} />
       <Route path="/dashboardFuncionarios" element={<DashboardFuncionarios />} />
       <Route path="/dashboardPecas" element={<DashboardPecas />} />
+      <Route path="/aeronaveSelecionada" element={<AeronaveSelecionada />} />
+      <Route path="/etapaSelecionada" element={<EtapaSelecionada />} />
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
 

@@ -7,25 +7,37 @@ import NavigationComponent from '../components/Navigation';
 import AeronaveCard from '../components/AeronaveCard';
 import CadastroAeronaveModal from '../components/cadastroAeronaveModal';
 
+export interface Etapa {
+  id: string;
+  nome: string;
+  prazo: string;
+  status: string;
+}
+
 export interface Aeronave {
   codigo: string;
   modelo: string;
   tipo: string;
   capacidade: number;
   alcance: number;
+  etapas: Array<Etapa>;
 }
-
 
 function DashboardAeronaves() {
   const [selecionado, setSelecionado] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const aeronave1 = {
+const aeronave1 = {
     codigo: 'A001',
     modelo: 'Boeing 737',
     tipo: 'Comercial',
     capacidade: 180,
-    alcance: 5000
+    alcance: 5000,
+    etapas: [
+      { id: "1", nome: 'Inspeção de Turbinas', prazo: '10', status: 'Concluída' },
+      { id: "2", nome: 'Revisão de Aviônicos', prazo: '20', status: 'Em Andamento' },
+      { id: "3", nome: 'Abastecimento', prazo: '30', status: 'Concluída' }
+    ]
   };
 
   const aeronave2 = {
@@ -33,7 +45,11 @@ function DashboardAeronaves() {
     modelo: 'Airbus A320',
     tipo: 'Comercial',
     capacidade: 150,
-    alcance: 4000
+    alcance: 4000,
+    etapas: [
+      { id: "1", nome: 'Limpeza Interna', prazo: '15', status: 'Concluída' },
+      { id: "2", nome: 'Checklist de Segurança', prazo: '16', status: 'Pendente' }
+    ]
   };
 
   const aeronave3 = {
@@ -41,7 +57,8 @@ function DashboardAeronaves() {
     modelo: 'Cessna 172',
     tipo: 'Militar',
     capacidade: 4,
-    alcance: 800
+    alcance: 800,
+    etapas: []
   };
 
   const aeronave4 = {
@@ -49,7 +66,10 @@ function DashboardAeronaves() {
     modelo: 'Embraer E195',
     tipo: 'Comercial',
     capacidade: 120,
-    alcance: 3500
+    alcance: 3500,
+    etapas: [
+      { id: "1", nome: 'Troca de Óleo', prazo: '67', status: 'Em Andamento' }
+    ]
   };
 
   const aeronave5 = {
@@ -57,7 +77,12 @@ function DashboardAeronaves() {
     modelo: 'Bombardier CRJ900',
     tipo: 'Militar',
     capacidade: 90,
-    alcance: 3000
+    alcance: 3000,
+    etapas: [
+      { id: "1", nome: 'Pintura de Fuselagem', prazo: '13', status: 'Concluída' },
+      { id: "2", nome: 'Ajuste de Flaps', prazo: '20', status: 'Concluída' },
+      { id: "3", nome: 'Teste de Voo', prazo: '90', status: 'Pendente' }
+    ]
   };
 
   const [aeronaves, setAeronaves] = useState<Aeronave[]>(

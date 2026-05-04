@@ -19,7 +19,6 @@ function Login() {
 
   const handleLogin = () => {
     
-    console.log(selectedLevel)
     switch (selectedLevel) {
       case "Administrador":
         login("Administrador");
