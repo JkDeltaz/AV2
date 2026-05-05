@@ -32,7 +32,7 @@ function NavigationComponent({ openModal }: {openModal: () => void}) {
         <NavLink 
             to="/dashboardAeronaves"
                 className={({ isActive }) => {
-                    const isChildRoute = location.pathname.includes('/aeronave') || location.pathname.includes('/etapa');
+                    const isChildRoute = location.pathname.toLowerCase().includes('aeronave') || location.pathname.includes('/etapa');
                     
                     return `${
                     isActive || isChildRoute 
@@ -69,6 +69,23 @@ function NavigationComponent({ openModal }: {openModal: () => void}) {
         <h1 
         className='font-mono text-default text-2xl ml-auto mt-auto mr-2'>
             {aeronave.modelo}
+        </h1>        
+
+        }
+        {location.pathname === "/pecasAeronave" && 
+        
+        <h1 
+        className='font-mono text-default text-2xl ml-auto mt-auto mr-2'>
+            {aeronave.modelo}
+        </h1>        
+
+        }
+
+        {location.pathname === "/dashboardPecas" && 
+        
+        <h1 
+        className='font-mono text-default text-2xl ml-auto mt-auto mr-2'>
+            Gerenciador de Peças
         </h1>        
 
         }

@@ -1,25 +1,54 @@
-import { useState, type ChangeEvent } from 'react'
+import { use, useState, type ChangeEvent } from 'react'
 import '../App.css'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Topbar from '../components/Topbar';
 import Footer from '../components/Footer';
 import NavigationComponent from '../components/Navigation';
-import { getPecas, type Peca } from '../data/mock_data';
+import { adicionarPecaAAeronave, getPecas, type Peca } from '../data/mock_data';
 import CadastroPecaModal from '../components/CadastroPecaModal';
+import AdicionarPecaModal from '../components/AdicionarPeca';
 
 
-function DashboardPecas() {
+function PecasAeronave() {
 
   const [selecionado, setSelecionado] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCadastroOpen, setIsCadastroOpen] = useState(false);
+  const [isAddOpen, setIsAddOpen] = useState(false);
   
-  const [pecas, setPecas] = useState<Peca[]>(getPecas());
+  const navigate = useNavigate();
+  const location = useLocation();
+  const aeronave = location.state?.aeronave;
+
+  const [aeronaveState, setAeronave] = useState(aeronave);
+
+  let pecasFiltradas = getPecas().filter(peca => aeronave.pecas.includes(peca.codigo))
+
+  const [pecas, setPecas] = useState<Peca[]>(pecasFiltradas);
 
   const btnStyle = 'bg-primario font-sans rounded border border-white/10 p-2 px-4 cursor-pointer hover:scale-102 hover:shadow-xl'
   
   const salvarPeca = (peca: Peca) => {
     setPecas([...pecas, peca])
+    setAeronave({...aeronaveState, pecas: [...aeronaveState.pecas, peca.codigo]})
+    }
+
+const adicionarPeca = (codigo: string) => {
+  const peca = getPecas().find(p => p.codigo === codigo);
+
+  if (peca) {
+    const novasPecasIds = [...aeronaveState.pecas, peca.codigo];
+
+    const aeronaveAtualizada = {
+      ...aeronaveState,
+      pecas: novasPecasIds
+    };
+
+    setPecas([...pecas, peca]);
+    setAeronave(aeronaveAtualizada);
+
+    navigate("/pecasAeronave", { state: { aeronave: aeronaveAtualizada } });
   }
+};
 
   return (
     <div className="bg-fundo min-h-screen overflow-x-hidden flex flex-col">
@@ -75,16 +104,20 @@ function DashboardPecas() {
               )}              
             </div>
 
-
-
           </div>
 
-          <div className='flex flex-1'>
-              <div className='mt-auto flex flex-1 gap-x-4 justify-end'>
+          <div className='ml-auto flex flex-1 w-1/8'>
+              <div className='mt-auto ml-auto flex flex-col flex-1 gap-4'>
                   <button className={btnStyle}
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => setIsCadastroOpen(true)}
                   >
                   Cadastrar Peça
+                  </button>  
+
+                  <button className={btnStyle}
+                  onClick={() => setIsAddOpen(true)}
+                  >
+                  Adicionar Peça
                   </button>  
               </div>
         
@@ -92,10 +125,11 @@ function DashboardPecas() {
 
         </div>
             
-        <CadastroPecaModal isOpen={isModalOpen} onSave={salvarPeca} onClose={() => setIsModalOpen(false)}/>
+        <CadastroPecaModal isOpen={isCadastroOpen} onSave={salvarPeca} onClose={() => setIsCadastroOpen(false)}/>
+        <AdicionarPecaModal isOpen={isAddOpen} onSave={adicionarPeca} onClose={() => setIsAddOpen(false)}/>
         <Footer/>
     </div>
   )
 }
 
-export default DashboardPecas
+export default PecasAeronave

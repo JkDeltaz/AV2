@@ -4,9 +4,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Topbar from '../components/Topbar';
 import Footer from '../components/Footer';
 import NavigationComponent from '../components/Navigation';
-import type { Aeronave, Etapa } from './DashboardAeronaves';
 import Icone from '../components/Icone';
 import NovoTesteModal from '../components/NovoTesteModal';
+import { type Etapa } from '../data/mock_data';
 
 function AeronaveSelecionada() {
 
@@ -32,6 +32,10 @@ function AeronaveSelecionada() {
 
   const handleEtapas = () => {
     navigate("/etapaSelecionada", { state: { aeronave: aeronave } });
+  }
+
+  const handleAbrirPecas = () => {
+    navigate("/pecasAeronave", { state: { aeronave: aeronave } });
   }
 
   const textStyle = `font-mono text-default text-[1.3rem] truncate text-center hover:whitespace-normal hover:overflow-visible hover:text-clip"`
@@ -95,6 +99,7 @@ function AeronaveSelecionada() {
                         </button>  
 
                         <button className={btnStyle}
+                        onClick={handleAbrirPecas}
                         >
                         Visualizar Peças
                         </button>  

@@ -6,6 +6,7 @@ import DashboardPecas from './pages/DashboardPecas';
 import './App.css'
 import AeronaveSelecionada from './pages/AeronaveSelecionada';
 import EtapaSelecionada from './pages/EtapaSelecionada';
+import PecasAeronave from './pages/PecasAeronave';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Route path="/dashboardPecas" element={<DashboardPecas />} />
       <Route path="/aeronaveSelecionada" element={<AeronaveSelecionada />} />
       <Route path="/etapaSelecionada" element={<EtapaSelecionada />} />
+      <Route path="/pecasAeronave" element={<PecasAeronave />} />
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
 
