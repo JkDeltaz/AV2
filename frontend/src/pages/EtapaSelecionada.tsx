@@ -10,6 +10,7 @@ import { type Aeronave, type Etapa } from '../data/mock_data';
 import ListaFuncionariosModal from '../components/ListaFuncionariosModal';
 import AdicionarFuncionarioModal from '../components/AdicionarFuncionario';
 import IniciarEtapaModal from '../components/IniciarEtapaModal';
+import { useAuth } from '../contexts/AuthContext';
 
 function EtapaSelecionada() {
 
@@ -20,6 +21,8 @@ function EtapaSelecionada() {
   const [isFuncionarioModalOpen, setIsFuncionarioModalOpen] = useState(false);
   const [isEtapaModalOpen, setIsEtapaModalOpen] = useState(false);
 
+  const { userPermission } = useAuth(); 
+  
   const btnStyle = 'bg-primario font-sans rounded border border-white/10 p-2 px-4 cursor-pointer hover:scale-102 hover:shadow-xl'
 
   if (!aeronave) {  
@@ -127,17 +130,20 @@ const avancarEtapa = () => {
 
                     {etapaAtual != null && etapaAtual.status != "Concluída" ?
                         <div className='gap-x-4 flex'>
+                          {userPermission != "Operador" && 
+                            <button className={btnStyle}
+                            onClick={() => setIsFuncionarioModalOpen(true)}
+                            >
+                            Adicionar Funcionário
+                            </button>                              
+                          }
                             <button className={btnStyle}
                             onClick={() => setIsListaModalOpen(true)}
                             >
                             Visualizar Funcionários
                             </button>  
 
-                            <button className={btnStyle}
-                            onClick={() => setIsFuncionarioModalOpen(true)}
-                            >
-                            Adicionar Funcionário
-                            </button>         
+     
                             <button className={btnStyle}
                             onClick={avancarEtapa}
                             >

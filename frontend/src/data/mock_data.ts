@@ -42,7 +42,7 @@ const funcionarios: Funcionario[] = [
     telefone: '(12) 99876-5432',
     endereco: 'Av. Brigadeiro Faria Lima, 2000 - São José dos Campos, SP',
     usuario: 'rebeca.admin',
-    senha: 'hash_password_123',
+    senha: '123456789',
     nivelPermissao: 'Administrador'
   },
   {
@@ -51,7 +51,7 @@ const funcionarios: Funcionario[] = [
     telefone: '(11) 98765-4321',
     endereco: 'Rua das Turbinas, 45 - Campinas, SP',
     usuario: 'isaura.eng',
-    senha: 'hash_password_456',
+    senha: 'abcdefghij',
     nivelPermissao: 'Engenheiro'
   },
   {
@@ -60,7 +60,7 @@ const funcionarios: Funcionario[] = [
     telefone: '(21) 97654-3210',
     endereco: 'Estrada do Galeão, s/n - Rio de Janeiro, RJ',
     usuario: 'guilherme.v',
-    senha: 'hash_password_789',
+    senha: '000000000',
     nivelPermissao: 'Engenheiro'
   },
   {
@@ -69,7 +69,7 @@ const funcionarios: Funcionario[] = [
     telefone: '(31) 96543-2109',
     endereco: 'Rua Aeroporto, 12 - Belo Horizonte, MG',
     usuario: 'le.op',
-    senha: 'hash_password_012',
+    senha: '67676767',
     nivelPermissao: 'Operador'
   },
   {
@@ -78,7 +78,7 @@ const funcionarios: Funcionario[] = [
     telefone: '(12) 77777-0413',
     endereco: 'Lugunica',
     usuario: 'subaru.maint',
-    senha: 'hash_password_345',
+    senha: 'pipipipopopo',
     nivelPermissao: 'Operador'
   }
 ];

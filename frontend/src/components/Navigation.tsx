@@ -54,7 +54,7 @@ function NavigationComponent({ openModal }: {openModal: () => void}) {
         Peças
         </NavLink>
         
-        {location.pathname === "/dashboardAeronaves" && 
+        {(location.pathname === "/dashboardAeronaves" && userPermission != "Operador") && 
         
         <button className='bg-primario font-mono rounded border p-1 px-6 cursor-pointer border-white/10 text-2xl hover:scale-102 transition ml-auto'
         onClick={openModal}
