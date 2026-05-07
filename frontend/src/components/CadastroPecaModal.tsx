@@ -88,7 +88,7 @@ function CadastroPecaModal({ isOpen, onClose, onSave }: CadastroPecaProps) {
                     </input>
 
                     <select name="status" className={inputCss} required
-                    value={pecaData.tipo} onChange={handleSelectChange}> 
+                    value={pecaData.status} onChange={handleSelectChange}> 
                         <option value="Em Produção">Em Produção</option>
                         <option value="Em Transporte">Em Transporte</option>
                         <option value="Pronta">Pronta</option>

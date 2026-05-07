@@ -74,11 +74,11 @@ const funcionarios: Funcionario[] = [
   },
   {
     id: 'F-408',
-    nome: 'Natsuki Subaru',
-    telefone: '(12) 77777-0413',
-    endereco: 'Lugunica',
-    usuario: 'subaru.maint',
-    senha: 'pipipipopopo',
+    nome: 'Gustavo Monteiro',
+    telefone: '(32) 95432-1098',
+    endereco: 'Minas Gerais',
+    usuario: 'gustavo.op',
+    senha: 'paodequeijo',
     nivelPermissao: 'Operador'
   }
 ];
