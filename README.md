@@ -6,6 +6,9 @@ Bem-vindo ao **Aerocode**, uma solução moderna de interface gráfica (GUI) des
 
 Este projeto faz parte da Atividade de Avaliação Individual 2 (AV2) e representa a evolução de um sistema CLI para uma **Single Page Application (SPA)** robusta. A Aerocode foca na eficiência operacional, permitindo que engenheiros e operadores gerenciem desde o cadastro de componentes até a entrega final da aeronave.
 
+## 📃 PDF do Relatório do Projeto
+[Relatório do Projeto](https://github.com/JkDeltaz/AV2/blob/main/docs/Relat%C3%B3rio%20de%20Projeto%20-%20Aerocode.pdf)
+
 ## 🛠️ Tecnologias Utilizadas
 
 - **React**: Biblioteca principal para construção da interface.
