@@ -6,7 +6,8 @@ import Footer from '../components/Footer';
 import NavigationComponent from '../components/Navigation';
 import Icone from '../components/Icone';
 import NovoTesteModal from '../components/NovoTesteModal';
-import { type Etapa } from '../data/mock_data';
+import { type Etapa, deletarAeronave } from '../data/mock_data';
+import { useAuth } from '../contexts/AuthContext';
 
 function AeronaveSelecionada() {
 
@@ -14,6 +15,7 @@ function AeronaveSelecionada() {
   const aeronave = location.state?.aeronave;
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { userPermission } = useAuth();
 
   const btnStyle = 'bg-primario font-sans rounded border border-white/10 p-2 px-4 cursor-pointer hover:scale-102 hover:shadow-xl'
 
@@ -36,6 +38,11 @@ function AeronaveSelecionada() {
 
   const handleAbrirPecas = () => {
     navigate("/pecasAeronave", { state: { aeronave: aeronave } });
+  }
+
+  const handleDeletarAeronave = () => {
+    deletarAeronave(aeronave.codigo);
+    navigate("/dashboardAeronaves");
   }
 
   const textStyle = `font-mono text-default text-[1.3rem] truncate text-center hover:whitespace-normal hover:overflow-visible hover:text-clip"`
@@ -108,6 +115,14 @@ function AeronaveSelecionada() {
                         >
                         Gerar Relatório
                         </button>  
+
+                        {userPermission === 'Administrador' && (
+                          <button className='bg-red-500 font-sans rounded border border-white/10 p-2 px-4 cursor-pointer hover:scale-102 hover:shadow-xl'
+                          onClick={handleDeletarAeronave}
+                          >
+                          Deletar Aeronave
+                          </button>
+                        )}
 
                     </div>
               

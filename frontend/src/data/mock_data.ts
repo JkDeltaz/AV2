@@ -216,3 +216,10 @@ export function adicionarPecaAAeronave(aeronaveCodigo: string, pecaCodigo: strin
     aeronave.pecas.push(pecaCodigo);
   }
 }
+
+export function deletarAeronave(aeronaveCodigo: string) {
+  const index = aeronaves.findIndex(a => a.codigo === aeronaveCodigo);
+  if (index !== -1) {
+    aeronaves.splice(index, 1);
+  }
+}
