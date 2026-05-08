@@ -99,6 +99,12 @@ function AeronaveSelecionada() {
                 <div className='flex flex-1'>
                     <div className='mt-auto flex flex-1 gap-x-4 justify-end'>
 
+                        <button className='bg-gray-600 font-sans rounded border border-white/10 p-2 px-4 cursor-pointer hover:scale-102 hover:shadow-xl'
+                        onClick={() => navigate(-1)}
+                        >
+                        Voltar
+                        </button>
+
                         <button className={btnStyle}
                         onClick={() => setIsModalOpen(true)}
                         >

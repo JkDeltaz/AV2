@@ -128,6 +128,12 @@ const avancarEtapa = () => {
 
                 <div className='flex mt-auto gap-x-4 justify-end'>
 
+                    <button className='bg-gray-600 font-sans rounded border border-white/10 p-2 px-4 cursor-pointer hover:scale-102 hover:shadow-xl'
+                    onClick={() => navigate(-1)}
+                    >
+                    Voltar
+                    </button>
+
                     {etapaAtual != null && etapaAtual.status != "Concluída" ?
                         <div className='gap-x-4 flex'>
                           {userPermission != "Operador" && 

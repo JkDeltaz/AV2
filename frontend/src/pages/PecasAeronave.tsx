@@ -108,6 +108,12 @@ const adicionarPeca = (codigo: string) => {
 
           <div className='ml-auto flex flex-1 w-1/8'>
               <div className='mt-auto ml-auto flex flex-col flex-1 gap-4'>
+                  <button className='bg-gray-600 font-sans rounded border border-white/10 p-2 px-4 cursor-pointer hover:scale-102 hover:shadow-xl'
+                  onClick={() => navigate(-1)}
+                  >
+                  Voltar
+                  </button>
+
                   <button className={btnStyle}
                   onClick={() => setIsCadastroOpen(true)}
                   >
