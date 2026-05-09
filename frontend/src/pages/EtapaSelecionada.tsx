@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from 'react'
+import { useEffect, useState, type ChangeEvent } from 'react'
 import '../App.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 import Topbar from '../components/Topbar';
@@ -25,9 +25,13 @@ function EtapaSelecionada() {
   
   const btnStyle = 'bg-primario font-sans rounded border border-white/10 p-2 px-4 cursor-pointer hover:scale-102 hover:shadow-xl'
 
-  if (!aeronave) {  
-    navigate("/dashboardAeronaves")
-  }
+  useEffect(() => {
+    if (!userPermission || !aeronave) {
+      navigate('/login', { replace: true });
+    }
+  }, [userPermission, aeronave, navigate]);
+
+  if (!aeronave) return null;
 
   const [aeronaveState, setAeronave] = useState<Aeronave>(aeronave);
   const pegarEtapaAtual = () => {

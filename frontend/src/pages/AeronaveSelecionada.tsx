@@ -1,11 +1,11 @@
-import { useState, type ChangeEvent } from 'react'
+import { useEffect, useState } from 'react'
 import '../App.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 import Topbar from '../components/Topbar';
 import Footer from '../components/Footer';
 import NavigationComponent from '../components/Navigation';
 import Icone from '../components/Icone';
-import NovoTesteModal from '../components/NovoTesteModal';
+import NovoTesteModal from '../components/novoTesteModal';
 import { type Etapa, deletarAeronave } from '../data/mock_data';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -19,9 +19,13 @@ function AeronaveSelecionada() {
 
   const btnStyle = 'bg-primario font-sans rounded border border-white/10 p-2 px-4 cursor-pointer hover:scale-102 hover:shadow-xl'
 
-  if (!aeronave) {
-    navigate("/dashboardAeronaves")
-  }
+  useEffect(() => {
+    if (!userPermission || !aeronave) {
+      navigate('/login', { replace: true });
+    }
+  }, [userPermission, aeronave, navigate]);
+
+  if (!aeronave) return null;
 
   const pegarEtapaAtual = () => {
     for (let i = aeronave.etapas.length - 1; i >= 0; i--) {

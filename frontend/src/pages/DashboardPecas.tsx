@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from 'react'
+import { useEffect, useState, type ChangeEvent } from 'react'
 import '../App.css'
 import { useNavigate } from 'react-router-dom';
 import Topbar from '../components/Topbar';
@@ -6,14 +6,24 @@ import Footer from '../components/Footer';
 import NavigationComponent from '../components/Navigation';
 import { getPecas, type Peca } from '../data/mock_data';
 import CadastroPecaModal from '../components/CadastroPecaModal';
+import { useAuth } from '../contexts/AuthContext';
 
 
 function DashboardPecas() {
+
+  const { userPermission } = useAuth();
+  const navigate = useNavigate();
 
   const [selecionado, setSelecionado] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   const [pecas, setPecas] = useState<Peca[]>(getPecas());
+
+  useEffect(() => {
+    if (!userPermission) {
+      navigate('/login', { replace: true });
+    }
+  }, [userPermission, navigate]);
 
   const btnStyle = 'bg-primario font-sans rounded border border-white/10 p-2 px-4 cursor-pointer hover:scale-102 hover:shadow-xl'
   

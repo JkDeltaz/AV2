@@ -1,4 +1,4 @@
-import { use, useState, type ChangeEvent } from 'react'
+import { useEffect, useState, type ChangeEvent } from 'react'
 import '../App.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 import Topbar from '../components/Topbar';
@@ -7,6 +7,7 @@ import NavigationComponent from '../components/Navigation';
 import { adicionarPecaAAeronave, getPecas, type Peca } from '../data/mock_data';
 import CadastroPecaModal from '../components/CadastroPecaModal';
 import AdicionarPecaModal from '../components/AdicionarPeca';
+import { useAuth } from '../contexts/AuthContext';
 
 
 function PecasAeronave() {
@@ -15,9 +16,18 @@ function PecasAeronave() {
   const [isCadastroOpen, setIsCadastroOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
   
+  const { userPermission } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const aeronave = location.state?.aeronave;
+
+  useEffect(() => {
+    if (!userPermission || !aeronave) {
+      navigate('/login', { replace: true });
+    }
+  }, [userPermission, aeronave, navigate]);
+
+  if (!aeronave) return null;
 
   const [aeronaveState, setAeronave] = useState(aeronave);
 

@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../App.css'
 import Topbar from '../components/Topbar';
 import Footer from '../components/Footer';
 import NavigationComponent from '../components/Navigation';
 import { getFuncionarios, type Funcionario } from '../data/mock_data';
 import CadastroFuncionarioModal from '../components/CadastroFuncionarioModal';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 
 function DashboardFuncionarios() {
@@ -16,6 +18,18 @@ function DashboardFuncionarios() {
   const [editingFuncionario, setEditingFuncionario] = useState<Funcionario | null>(null);
 
   const btnStyle = 'bg-primario font-sans rounded border border-white/10 p-2 px-4 cursor-pointer hover:scale-102 hover:shadow-xl'
+
+  const { userPermission } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+      if (!userPermission || userPermission !== 'Administrador') {
+        navigate('/login', { replace: true });
+      }
+    }, [userPermission, navigate, location.pathname]);
+
 
   const salvarFuncionario = (funcionario: Funcionario, isEdit: boolean) => {
     if (isEdit) {

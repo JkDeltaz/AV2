@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from 'react'
+import { useEffect, useState, type ChangeEvent } from 'react'
 import '../App.css'
 import { useNavigate } from 'react-router-dom';
 import Topbar from '../components/Topbar';
@@ -7,15 +7,25 @@ import NavigationComponent from '../components/Navigation';
 import AeronaveCard from '../components/AeronaveCard';
 import CadastroAeronaveModal from '../components/cadastroAeronaveModal';
 import { getAeronaves, type Aeronave } from '../data/mock_data';
+import { useAuth } from '../contexts/AuthContext';
 
 
 
 function DashboardAeronaves() {
+  const { userPermission } = useAuth();
+  const navigate = useNavigate();
+
   const [selecionado, setSelecionado] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [aeronaves, setAeronaves] = useState<Aeronave[]>(
     getAeronaves()
   )
+
+  useEffect(() => {
+    if (!userPermission) {
+      navigate('/login', { replace: true });
+    }
+  }, [userPermission, navigate]);
 
 
   const salvarAeronave = (aeronave: Aeronave) => {
