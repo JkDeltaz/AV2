@@ -5,7 +5,6 @@ import Topbar from '../components/Topbar';
 import Footer from '../components/Footer';
 import NavigationComponent from '../components/Navigation';
 import Icone from '../components/Icone';
-import NovoTesteModal from '../components/NovoTesteModal';
 import { type Aeronave, type Etapa } from '../data/mock_data';
 import ListaFuncionariosModal from '../components/ListaFuncionariosModal';
 import AdicionarFuncionarioModal from '../components/AdicionarFuncionario';
